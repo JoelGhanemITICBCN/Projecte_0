@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmls:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>LISTADO DE LIBROS</title>
+  </head>
+  <body>
+    <h1>LISTADO DE LIBROS</h1>
+    <h3>Usuario: <span th:text="${usuario.nombre}"></span></h3>
+    <h3>Password: <span th:text="${usuario.password}"></span></h3>
+    <table border=1>
+      <thead>
+        <tr><th>Id<th>Autor<th>Editorial<th>Fecha<th>Tematica<th>Borrado<th>Modificar</tr>
+      </thead>
+      <tbody>
+        <tr th:if="${libros.empty}">
+          <td colspan="2">No Books Available</td>
+        </tr>
+        <tr th:each="libro : ${libros}">
+          <td><span th:text="${libro.id}"></span></td>
+          <td><span th:text="${libro.titulo}"></span></td>
+          <td><span th:text="${libro.autor}"></span></td>
+          <td><span th:text="${libro.editorial}"></span></td>
+          <td><span th:text="${libro.fecha}"></span></td>
+          <td><span th:text="${libro.tematica}"></span></td>
+          <td><a th:href="@{/borrado/}+${libro.id}">Borrado</a></td>
+          <td><a th:href="@{/modificar/}+${libro.id}">Modificar</a></td>
+        </tr>
+      </tbody>
+      <form action="/insertar" method="post">
+        <br>ID: <input type="text" name="id">
+          TITULO: <input type="text" name="titulo">
+          AUTOR: <input type="text" name="autor">
+          EDITORIAL: <input type="text" name="editorial">
+          FECHA: <input type="text" name="fecha">
+          TEMATICA: <input type="text" name="tematica">
+        <input type=submit name=submit value="Insertal Libro">
+      </form>
+  </body>
+</html>
